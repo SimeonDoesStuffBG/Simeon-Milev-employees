@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Identifier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div id="app">
+        <div class="inputs">
+            <input type="button" @click="generateUsers()" value="Generate random formated CSV file" title="creates a random list of employees, projects, start and end dates and exports them as a CSV file"/>
+            <input type='file' id='uploadfile' @change="getInfo($event)">
+        </div>
+        
+        <div v-if="info.length>0">
+            <table>
+                <tr :key="storedData.indexOf(row)" v-for="row in storedData">
+                    <th v-if="storedData.indexOf(row)===0" :key="row.indexOf(elem)" v-for="elem in row">{{elem}}</th>
+                    <td v-else :key="row.indexOf(elem)" v-for="elem in row">{{elem}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+    <script src="writeCSV.js"></script>
+</body>
+</html>
